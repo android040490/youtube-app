@@ -6,10 +6,30 @@ import {fetchMoviesBySearch} from '../redux/actions';
 import MoviesListItem from '../components/MoviesListItem';
 import Preloader from '../components/Preloader';
 
+const mapStateToProps = (state) => {
+  return{
+    movies : state.moviesBySearch
+  }
+}
 
-class MoviesBySearch extends React.Component{
+const mapDispatchToProps = {
+  fetchMoviesBySearch
+}
+
+@connect( mapStateToProps, mapDispatchToProps )
+export default class MoviesBySearch extends React.Component{
 
   componentDidMount(){
+    this.getMovies()
+  }
+
+  componentWillReceiveProps(nextProps){
+    if( this.props.params.query != nextProps.params.query){
+      this.props.fetchMoviesBySearch(nextProps.params.query)
+    }
+  }
+
+  getMovies(){
     this.props.fetchMoviesBySearch(this.props.params.query)
   }
 
@@ -29,14 +49,3 @@ class MoviesBySearch extends React.Component{
   }
 }
 
-const mapStateToProps = (state) => {
-  return{
-    movies : state.moviesBySearch
-  }
-}
-
-const mapDispatchToProps = {
-  fetchMoviesBySearch
-}
-
-export default connect( mapStateToProps, mapDispatchToProps )(MoviesBySearch);

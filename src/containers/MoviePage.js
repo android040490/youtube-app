@@ -6,7 +6,17 @@ import {fetchMovieById} from '../redux/actions';
 import {trimString} from '../community_functions';
 import Preloader from '../components/Preloader';
 
-class MoviePage extends Component{
+const mapStateToProps = (state) => {
+  return {
+    movie : state.movieInfo 
+  }
+}
+
+const mapDispatchToProps = {
+  fetchMovieById
+}
+@connect(mapStateToProps, mapDispatchToProps)
+export default class MoviePage extends Component{
   constructor(props){
     super(props)
   }
@@ -46,16 +56,3 @@ class MoviePage extends Component{
     )
   }
 }
-
-
-const mapStateToProps = (state) => {
-  return {
-    movie : state.movieInfo 
-  }
-}
-
-const mapDispatchToProps = {
-  fetchMovieById
-}
-
-export default connect( mapStateToProps, mapDispatchToProps)(MoviePage);

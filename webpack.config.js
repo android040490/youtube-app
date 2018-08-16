@@ -25,7 +25,8 @@ module.exports = {
                 loader: "babel-loader",
                 exclude: /node_modules/,
                 options:{
-                    presets:["env", "es2015", "stage-0", "react"]    // используемые плагины
+                    plugins: ["transform-decorators-legacy"],
+                    presets:[ "es2015", "stage-0", "react"]    // используемые плагины
                 }
                
             },

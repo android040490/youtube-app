@@ -5,7 +5,19 @@ import {fetchMovies} from '../redux/actions';
 import MoviesListItem from '../components/MoviesListItem';
 import Preloader from '../components/Preloader';
 
-class MoviesList extends React.Component{
+const mapStateToProps = (state) => {
+  return { 
+    movies : state.movies
+   }
+}
+
+const mapDispatchToProps = {
+  fetchMovies
+}
+
+@connect( mapStateToProps, mapDispatchToProps)
+
+export default class MoviesList extends React.Component{
   constructor(props){
     super(props);
 
@@ -48,18 +60,3 @@ class MoviesList extends React.Component{
     )
   }
 }
-
-const mapStateToProps = (state) => {
-  return { 
-    movies : state.movies
-   }
-}
-
-const mapDispatchToProps = {
-  fetchMovies
-}
-
-export default connect( mapStateToProps, mapDispatchToProps)(MoviesList);
-
-
- 
